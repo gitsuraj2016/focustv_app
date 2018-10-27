@@ -11,8 +11,8 @@ class NewsItem < ApplicationRecord
   private
 
   def image_dimensions
-    required_width  = 90
-    required_height = 75
+    required_width  = 400
+    required_height = 400
     if photo.queued_for_write[:original].present?
        dimensions = Paperclip::Geometry.from_file(photo.queued_for_write[:original].path)
        errors.add(:photo, "Width must be #{required_width}px") unless dimensions.width == required_width
