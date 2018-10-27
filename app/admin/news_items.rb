@@ -47,8 +47,21 @@ permit_params do
     f.input :title
     f.input :subtitle, :input_html => { :disabled => false , :id => 'sub_title' }
     f.input :description
-    f.input :photo, :as => :file
-    f.input :photolink, :as => :url
+    f.input :id, label: "Select Photo Option", :as => :select, :collection => ["Upload","Insert Link"],:input_html => {
+  :onchange => "
+    var selVal = $(this).val();
+    if(selVal == 'Upload'){
+      $('#photo_upload').prop('disabled', false);
+      $('#photo_link').prop('disabled', true);
+      $('#photo_link').val('');
+    }else{
+      $('#photo_link').prop('disabled', false);
+      $('#photo_upload').prop('disabled', true);
+    }
+  "
+}
+    f.input :photo, :as => :file ,:input_html => { :disabled => true , :id => 'photo_upload' }
+    f.input :photolink, :as => :url ,:input_html => { :disabled => true , :id => 'photo_link' }
     f.input :videolink, :as => :url
   end
   f.actions
