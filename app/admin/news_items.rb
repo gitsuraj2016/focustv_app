@@ -33,19 +33,19 @@ permit_params do
   :onchange => "
     var selVal = $(this).val();
     if(selVal == '1'){
+      $('#sub_title').prop('disabled', true);
       $('#sub_cat').prop('disabled', false);
       $('#sub_cat').val(0);
     }else{
-      $('#sub_title').prop('disabled', true);
+      $('#sub_title').prop('disabled', false);
       $('#sub_cat').prop('disabled', true);
       $('#sub_cat').val(0);
     }
   "
 }
-   	f.input :subcategory,:input_html => { :disabled => true , :id => 'sub_cat' ,:onchange => 
-      "  $('#sub_title').prop('disabled', false);  " }
+   	f.input :subcategory,:input_html => { :disabled => true , :id => 'sub_cat' }
     f.input :title
-    f.input :subtitle, :input_html => { :disabled => true , :id => 'sub_title' }
+    f.input :subtitle, :input_html => { :disabled => false , :id => 'sub_title' }
     f.input :description
     f.input :photo, :as => :file
     f.input :photolink, :as => :url
