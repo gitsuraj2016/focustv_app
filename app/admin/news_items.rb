@@ -29,10 +29,23 @@ permit_params do
 
   form do |f|
    f.inputs "Details" do
-   	f.input :category
-   	f.input :subcategory
+   	f.input :category, :input_html => {
+  :onchange => "
+    var selVal = $(this).val();
+    if(selVal == '1'){
+      $('#sub_cat').prop('disabled', false);
+      $('#sub_cat').val(0);
+    }else{
+      $('#sub_title').prop('disabled', true);
+      $('#sub_cat').prop('disabled', true);
+      $('#sub_cat').val(0);
+    }
+  "
+}
+   	f.input :subcategory,:input_html => { :disabled => true , :id => 'sub_cat' ,:onchange => 
+      "  $('#sub_title').prop('disabled', false);  " }
     f.input :title
-    f.input :subtitle
+    f.input :subtitle, :input_html => { :disabled => true , :id => 'sub_title' }
     f.input :description
     f.input :photo, :as => :file
     f.input :photolink, :as => :url
