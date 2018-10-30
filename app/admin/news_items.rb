@@ -31,15 +31,20 @@ permit_params do
    f.inputs "Details" do
    	f.input :category, :input_html => {
   :onchange => "
-    var selVal = $(this).val();
-    if(selVal == '1'){
+    var selVal = $(this).find('option:selected').text();
+    alert(selVal);
+    if(selVal == 'NEWS'){
       $('#sub_title').prop('disabled', true);
       $('#sub_cat').prop('disabled', false);
       $('#sub_cat').val(0);
+      $('#photo_upload_select').prop('disabled', false);
+    }else if(selVal == 'VIRUL VIDEO'){
+       $('#photo_upload_select').prop('disabled', true);
     }else{
       $('#sub_title').prop('disabled', false);
       $('#sub_cat').prop('disabled', true);
       $('#sub_cat').val(0);
+      $('#photo_upload_select').prop('disabled', false);
     }
   "
 }
@@ -47,22 +52,26 @@ permit_params do
     f.input :title
     f.input :subtitle, :input_html => { :disabled => false , :id => 'sub_title' }
     f.input :description
-    f.input :id, label: "Select Photo Option", :as => :select, :collection => ["Upload","Insert Link"],:input_html => {
-  :onchange => "
+    f.input :id, label: "Select Photo Option", :as => :select, :collection => ["Upload","Insert Link"],:input_html => { :disabled => false,
+  :id => 'photo_upload_select',:onchange => "
     var selVal = $(this).val();
     if(selVal == 'Upload'){
       $('#photo_upload').prop('disabled', false);
       $('#photo_link').prop('disabled', true);
       $('#photo_link').val('');
+      $('#video_link').val('');
+      $('#video_link').prop('disabled', true);
     }else{
       $('#photo_link').prop('disabled', false);
       $('#photo_upload').prop('disabled', true);
+      $('#video_link').val('');
+      $('#video_link').prop('disabled', true);
     }
   "
 }
     f.input :photo, :as => :file ,:input_html => { :disabled => true , :id => 'photo_upload' }
     f.input :photolink, :as => :url ,:input_html => { :disabled => true , :id => 'photo_link' }
-    f.input :videolink, :as => :url
+    f.input :videolink, :as => :url ,:input_html => { :disabled => false , :id => 'video_link' }
   end
   f.actions
  end
