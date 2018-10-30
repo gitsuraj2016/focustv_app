@@ -32,13 +32,12 @@ permit_params do
    	f.input :category, :input_html => {
   :onchange => "
     var selVal = $(this).find('option:selected').text();
-    alert(selVal);
     if(selVal == 'NEWS'){
       $('#sub_title').prop('disabled', true);
       $('#sub_cat').prop('disabled', false);
       $('#sub_cat').val(0);
       $('#photo_upload_select').prop('disabled', false);
-    }else if(selVal == 'VIRUL VIDEO'){
+    }else if(selVal == 'VIRAL VIDEO'){
        $('#photo_upload_select').prop('disabled', true);
     }else{
       $('#sub_title').prop('disabled', false);
