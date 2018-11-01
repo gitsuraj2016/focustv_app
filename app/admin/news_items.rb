@@ -51,7 +51,7 @@ permit_params do
     f.input :title
     f.input :subtitle, :input_html => { :disabled => false , :id => 'sub_title' }
     f.input :description
-    f.input :id, label: "Select Photo Option", :as => :select, :collection => ["Upload","Insert Link"],:input_html => { :disabled => false,
+    f.input :id, include_blank: false , label: "Select Photo Option", :as => :select, :collection => ["Select Option","Upload","Link"],:input_html => { :disabled => false,
   :id => 'photo_upload_select',:onchange => "
     var selVal = $(this).val();
     if(selVal == 'Upload'){
@@ -60,6 +60,8 @@ permit_params do
       $('#photo_link').val('');
       $('#video_link').val('');
       $('#video_link').prop('disabled', true);
+    }else if(selVal == 'Select Option'){
+       $('#video_link').prop('disabled', false);
     }else{
       $('#photo_link').prop('disabled', false);
       $('#photo_upload').prop('disabled', true);
