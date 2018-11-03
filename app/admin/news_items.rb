@@ -49,7 +49,7 @@ permit_params do
 }
    	f.input :subcategory,:input_html => { :disabled => true , :id => 'sub_cat' }
     f.input :title
-    f.input :subtitle, :input_html => { :disabled => false , :id => 'sub_title' }
+    # f.input :subtitle, :input_html => { :disabled => false , :id => 'sub_title' }
     f.input :description
     f.input :id, include_blank: false , label: "Select Photo Option", :as => :select, :collection => ["Select Option","Upload","Link"],:input_html => { :disabled => false,
   :id => 'photo_upload_select',:onchange => "
@@ -62,6 +62,7 @@ permit_params do
       $('#video_link').prop('disabled', true);
     }else if(selVal == 'Select Option'){
        $('#video_link').prop('disabled', false);
+       $('#photo_link').prop('disabled', true);
     }else{
       $('#photo_link').prop('disabled', false);
       $('#photo_upload').prop('disabled', true);
